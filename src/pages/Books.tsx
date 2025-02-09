@@ -9,7 +9,7 @@ const Books = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("tolkien");
 
   const fetchBooks = async () => {
     setLoading(true);
@@ -37,6 +37,7 @@ const Books = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 px-6 py-8">
+        <title>Livres-Le Coin Lecture</title>
       <h1 className="text-4xl font-bold text-center text-blue-600">📚 Le Coin Lecture</h1>
 
       {/* Barre de recherche */}

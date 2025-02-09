@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
+
 const Home = () => {
   return (
     <motion.div
@@ -9,6 +10,8 @@ const Home = () => {
       transition={{ duration: 0.5 }}
       className="h-screen flex flex-col justify-center items-center bg-gray-100 px-6"
     >
+      <title>Accueil - Le Coin Lecture</title>
+    
       <h1 className="text-5xl font-bold text-blue-600">Bienvenue sur Le Coin Lecture 📖</h1>
       <p className="text-gray-700 text-lg mt-4">
         Découvrez un large choix de livres et plongez dans un univers fascinant !
@@ -24,3 +27,4 @@ const Home = () => {
 };
 
 export default Home;
+

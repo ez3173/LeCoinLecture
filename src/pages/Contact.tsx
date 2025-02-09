@@ -8,6 +8,7 @@ const Contact = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen flex flex-col justify-center items-center bg-gray-100 px-6 text-center"
     >
+        <title>Contactez-nous - Le Coin Lecture</title>
       <h1 className="text-4xl font-bold text-blue-600">Contactez-nous</h1>
       <p className="text-gray-700 text-lg mt-4 max-w-2xl">
         Une question ? Une suggestion ? N’hésitez pas à nous contacter en remplissant le formulaire ci-dessous.

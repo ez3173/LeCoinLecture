@@ -1,13 +1,16 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const About = () => {
   return (
+    
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       className="min-h-screen flex flex-col justify-center items-center bg-gray-100 px-6 text-center"
     >
+        <title>À propos - Le Coin Lecture</title>
       <h1 className="text-4xl font-bold text-blue-600">À propos de nous</h1>
       <p className="text-gray-700 text-lg mt-4 max-w-2xl">
         Le Coin Lecture est une plateforme dédiée aux amoureux des livres. 
@@ -18,9 +21,11 @@ const About = () => {
         <button className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-700 transition">
           En savoir plus
         </button>
-        <button className="bg-gray-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-gray-700 transition">
-          Nous contacter
-        </button>
+        <Link
+        to="/contact" 
+        className="bg-gray-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-gray-700 transition">
+            Nous contacter
+        </Link>
       </div>
     </motion.div>
   );
