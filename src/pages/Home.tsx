@@ -7,45 +7,31 @@ const Home = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7 }}
-      className="h-screen flex flex-col justify-center items-center bg-gray-100 px-6"
+      className="h-screen flex flex-col justify-center items-center bg-gradient-to-r from-blue-50 to-blue-100 px-6"
     >
       <title>Accueil - Le Coin Lecture</title>
-
-      {/* Section avec l'image d'illustration */}
-      <motion.div
-        className="w-full max-w-lg mx-auto mb-8"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        <img
-          src="https://via.placeholder.com/800x400/0099CC/ffffff?text=Le+Coin+Lecture"
-          alt="Livres"
-          className="w-full h-auto rounded-lg shadow-lg"
-        />
-      </motion.div>
-
-      {/* Titre animé */}
+      
+      {/* Titre principal */}
       <motion.h1
-        className="text-5xl font-extrabold text-blue-600 text-center"
+        className="text-5xl font-extrabold text-blue-700 text-center drop-shadow-md"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
       >
         Bienvenue sur Le Coin Lecture 📖
       </motion.h1>
-
-      {/* Description de l'accueil */}
+      
+      {/* Description */}
       <motion.p
-        className="text-gray-700 text-lg mt-4 text-center max-w-2xl"
+        className="text-gray-700 text-lg mt-4 text-center max-w-2xl leading-relaxed"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.6 }}
       >
         Découvrez un large choix de livres et plongez dans un univers fascinant. Que vous soyez passionné par la littérature, la science-fiction ou le développement personnel, vous trouverez ici votre prochain coup de cœur !
       </motion.p>
-
-      {/* Call-to-action (CTA) */}
+      
+      {/* Bouton d'exploration */}
       <motion.div
         className="mt-6"
         initial={{ opacity: 0, y: 20 }}
@@ -54,25 +40,26 @@ const Home = () => {
       >
         <Link
           to="/books"
-          className="bg-blue-500 text-white px-8 py-4 rounded-lg shadow-md text-xl hover:bg-blue-700 transition"
+          className="bg-blue-600 text-white px-8 py-4 rounded-full shadow-lg text-xl font-semibold transition transform hover:bg-blue-800 hover:-translate-y-1 hover:shadow-xl"
         >
           Explorer les livres
         </Link>
       </motion.div>
-
-      {/* Section supplémentaire avec des icônes ou un texte inspirant */}
+      
+      {/* Citation inspirante */}
       <motion.div
         className="mt-10 text-center"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.5 }}
       >
-        <p className="text-gray-600 text-xl">"Un livre est un ami qui ne vous trahit jamais."</p>
+        <p className="text-gray-600 text-xl italic">"Un livre est un ami qui ne vous trahit jamais."</p>
       </motion.div>
     </motion.div>
   );
 };
 
 export default Home;
+
 
 

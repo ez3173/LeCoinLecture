@@ -1,26 +1,40 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen flex flex-col justify-center items-center bg-gray-100 px-6 text-center"
+      className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-blue-50 to-gray-100 px-6 text-center"
     >
-        <title>Contactez-nous - Le Coin Lecture</title>
-      <h1 className="text-4xl font-bold text-blue-600">Contactez-nous</h1>
+      <h1 className="text-5xl font-extrabold text-blue-700">Contactez-nous</h1>
       <p className="text-gray-700 text-lg mt-4 max-w-2xl">
         Une question ? Une suggestion ? N’hésitez pas à nous contacter en remplissant le formulaire ci-dessous.
       </p>
       
-      <form className="mt-6 bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
+      <form onSubmit={handleSubmit} className="mt-6 bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">Nom</label>
           <input
             type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Votre nom"
+            required
           />
         </div>
 
@@ -28,21 +42,29 @@ const Contact = () => {
           <label className="block text-gray-700 font-semibold mb-2">Email</label>
           <input
             type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Votre email"
+            required
           />
         </div>
 
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">Message</label>
           <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Votre message"
             rows={4}
+            required
           ></textarea>
         </div>
 
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-700 transition w-full">
+        <button type="submit" className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-800 transition w-full">
           Envoyer
         </button>
       </form>
