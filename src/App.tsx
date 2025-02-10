@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Books from "./pages/Books";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import BookDetails from "./pages/BookDetails";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/books" element={<Books />} />
+              <Route path="/books/:bookId" element={<BookDetails />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

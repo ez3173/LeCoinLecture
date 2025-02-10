@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Book } from "../types/Book";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import Pagination from "../components/Pagination"; // 🆕 Import du composant Pagination
 
 const API_URL = "https://openlibrary.org/search.json";
 const booksPerPage = 30; // Nombre de livres affichés par page
@@ -10,6 +12,8 @@ const Books = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>("tolkien");
+  const [pendingSearchTerm, setPendingSearchTerm] = useState<string>("tolkien");
+  const [totalPages, setTotalPages] = useState<number>(1); // 🆕 Stocke le nombre total de pages
 
   const fetchBooks = async () => {
     setLoading(true);
@@ -21,8 +25,10 @@ const Books = () => {
 
       if (data.docs) {
         setBooks(data.docs);
+        setTotalPages(Math.ceil(data.numFound / booksPerPage)); // 🆕 Calcul du nombre total de pages
       } else {
         setBooks([]);
+        setTotalPages(1);
       }
     } catch (error) {
       console.error("Erreur lors de la récupération des livres:", error);
@@ -32,26 +38,41 @@ const Books = () => {
   };
 
   useEffect(() => {
-    fetchBooks();
-  }, [currentPage, searchTerm]);
+    const delay = setTimeout(() => {
+      fetchBooks();
+    }, 500);
+
+    return () => clearTimeout(delay);
+  }, [searchTerm, currentPage]);
 
   return (
     <div className="min-h-screen bg-gray-100 px-6 py-8">
-        <title>Livres-Le Coin Lecture</title>
       <h1 className="text-4xl font-bold text-center text-blue-600">📚 Le Coin Lecture</h1>
 
-      {/* Barre de recherche */}
-      <div className="flex justify-center mt-6">
-        <input
-          type="text"
-          placeholder="Rechercher un livre..."
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
+      {/* Barre de recherche avec bouton */}
+      <div className="flex justify-center mt-6 space-x-4">
+      <input
+            type="text"
+            placeholder="Rechercher un livre..."
+            value={pendingSearchTerm}
+            onChange={(e) => setPendingSearchTerm(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setSearchTerm(pendingSearchTerm);
+                setCurrentPage(1);
+              }
+            }}
+            className="w-full max-w-lg px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        <button
+          onClick={() => {
+            setSearchTerm(pendingSearchTerm);
             setCurrentPage(1);
           }}
-          className="w-full max-w-lg px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+        >
+          Rechercher
+        </button>
       </div>
 
       {/* Affichage du chargement */}
@@ -88,15 +109,12 @@ const Books = () => {
                 <p className="text-gray-500 text-sm">📅 Année : {book.first_publish_year || "Inconnue"}</p>
                 <p className="text-gray-500 text-sm">📖 Éditions : {book.edition_count}</p>
 
-                {/* Lien vers Open Library */}
-                <a
-                  href={`https://openlibrary.org${book.key}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block mt-3 text-blue-500 font-semibold hover:underline"
-                >
+                {/* Lien vers plus de détails */}
+                <Link 
+                to={`/books/${encodeURIComponent(book.key.replace("/works/", ""))}`} 
+                className="text-blue-500 mt-4 block hover:underline">
                   📖 Voir plus
-                </a>
+                </Link>
               </div>
             </motion.div>
           ))
@@ -105,29 +123,17 @@ const Books = () => {
         )}
       </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center mt-8">
-        <button
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-300 text-gray-700 rounded-l-lg hover:bg-gray-400 disabled:opacity-50"
-        >
-          ⬅ Précédent
-        </button>
-        <span className="px-6 py-2 bg-gray-200 text-gray-700 font-bold">Page {currentPage}</span>
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          className="px-4 py-2 bg-gray-300 text-gray-700 rounded-r-lg hover:bg-gray-400"
-        >
-          Suivant ➡
-        </button>
-      </div>
+      {/* 🆕 Utilisation du composant Pagination */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 };
 
 export default Books;
-
 
 
 

@@ -2,23 +2,23 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-blue-600 text-white p-4 shadow-lg">
+    <nav className="bg-gradient-to-r from-blue-500 to-blue-700 text-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold">
+        <Link to="/" className="text-3xl font-extrabold hover:scale-105 transition-transform">
           Le Coin Lecture 📚
         </Link>
-        <ul className="flex space-x-6">
+        <ul className="flex space-x-8 text-lg font-medium">
           <li>
-            <Link to="/" className="hover:text-gray-200 transition">Accueil</Link>
+            <Link to="/" className="hover:text-gray-200 transition duration-300 transform hover:scale-105">Accueil</Link>
           </li>
           <li>
-            <Link to="/books" className="hover:text-gray-200 transition">Livres</Link>
+            <Link to="/books" className="hover:text-gray-200 transition duration-300 transform hover:scale-105">Livres</Link>
           </li>
           <li>
-            <Link to="/about" className="hover:text-gray-200 transition">À propos</Link>
+            <Link to="/about" className="hover:text-gray-200 transition duration-300 transform hover:scale-105">À propos</Link>
           </li>
           <li>
-            <Link to="/contact" className="hover:text-gray-200 transition">Contact</Link>
+            <Link to="/contact" className="hover:text-gray-200 transition duration-300 transform hover:scale-105">Contact</Link>
           </li>
         </ul>
       </div>
@@ -27,3 +27,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
