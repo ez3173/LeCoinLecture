@@ -12,7 +12,7 @@ const Navbar = () => {
   }, [isMenuOpen]);
 
   return (
-    <nav className="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white shadow-lg">
+    <nav className="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white shadow-lg sticky top-0 z-50 bg-white">
       <div className="container mx-auto flex justify-between items-center p-6 relative">
         {/* Logo */}
         <Link to="/" className="text-2xl font-extrabold tracking-wider flex items-center space-x-3">
@@ -30,7 +30,7 @@ const Navbar = () => {
           </svg>
         </button>
 
-        {/* Menu Pc */}
+        {/* Menu PC */}
         <div className="hidden md:flex space-x-8 text-lg font-semibold">
           {[
             { to: "/", label: "Accueil" },
@@ -45,9 +45,9 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Menu téléphone */}
+      {/* Menu mobile */}
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center space-y-6 text-lg font-semibold">
+        <div className="md:hidden fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center space-y-6 text-lg font-semibold z-50">
           {[
             { to: "/", label: "Accueil" },
             { to: "/books", label: "Livres" },
@@ -68,5 +68,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
