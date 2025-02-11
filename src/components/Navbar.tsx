@@ -5,11 +5,11 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
-  // Bloque le défilement de la page lorsque le menu burger est ouvert
+  // Fonction pour gérer le clic sur le menu burger
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
+  // Bloque le défilement de la page lorsque le menu burger est ouvert
   const handleScroll = () => {
     if (window.scrollY > 10) {
       setIsSticky(true); 
@@ -17,7 +17,7 @@ const Navbar = () => {
       setIsSticky(false);
     }
   };
-
+  // Gestion du défilement de la page
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "auto"; 
     window.addEventListener("scroll", handleScroll);

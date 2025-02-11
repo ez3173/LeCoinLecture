@@ -22,7 +22,7 @@ const App = () => {
               <Route path="/books" element={<Books />} />
               <Route path="/books/:bookId" element={<BookDetails />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/*" element={<NotFound />} />
             </Routes>
           </div>
         </ErrorBoundary>
