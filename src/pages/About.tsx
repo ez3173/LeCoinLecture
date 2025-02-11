@@ -9,8 +9,9 @@ const About = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-blue-50 to-gray-100 px-6 text-center"
     >
-      {/* Titre de la page */}
+      
       <title>À propos - Le Coin Lecture</title>
+      {/* Titre principal */}
       <motion.h1
         className="text-5xl font-extrabold text-blue-700"
         initial={{ opacity: 0, y: -20 }}

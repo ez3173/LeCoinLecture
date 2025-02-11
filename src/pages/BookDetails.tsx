@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getBookDetails } from "../services/bookService";
+import { getBooks, getBookDetails } from "../services/bookService";
 import { motion } from "framer-motion";
 import { Book } from "../types/Book";
 
@@ -13,18 +13,21 @@ const BookDetails = () => {
     if (bookId) {
       const fetchBookDetails = async () => {
         try {
-          const bookData = await getBookDetails(bookId);
+          const booksResponse = await getBooks(bookId);
+          const bookData = booksResponse.docs[0];
+          const descriptionResponse = await getBookDetails(bookId);
+          
           setBookDetails({
             key: bookData.key,
             title: bookData.title,
-            author_name: bookData.authors?.map((author: { name: string }) => author.name).join(", ") || "Auteur inconnu",
+            author_name: bookData.author_name ? bookData.author_name.join(", ") : "Auteur inconnu",
             first_publish_year: bookData.first_publish_year || "Date inconnue",
             edition_count: bookData.edition_count || 0,
-            cover_i: bookData.covers?.[0] || 0,
-            description:
-              typeof bookData.description === "string" ? bookData.description : bookData.description?.value || "Pas de description disponible",
+            cover_i: bookData.cover_i || 0,
+            description: typeof descriptionResponse.description === "string" 
+              ? descriptionResponse.description 
+              : descriptionResponse.description?.value || "Pas de description disponible",
           });
-          
           
           document.title = `${bookData.title} - Le Coin Lecture`;
         } catch (error) {

@@ -5,27 +5,32 @@ import Pagination from "../components/Pagination";
 import { getBooks } from "../services/bookService";
 import { Book } from "../types/Book";
 
-const booksPerPage = 30;
+const booksPerPage = 30; 
 
 const Books = () => {
+  // États pour gérer les données et l'affichage
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [searchTerm, setSearchTerm] = useState<string>("tolkien");
-  const [pendingSearchTerm, setPendingSearchTerm] = useState<string>("tolkien");
+  // Terme de recherche par défaut
+  const [searchTerm, setSearchTerm] = useState<string>("tolkien"); 
+  // Terme en cours de saisie
+  const [pendingSearchTerm, setPendingSearchTerm] = useState<string>(""); 
   const [totalPages, setTotalPages] = useState<number>(1);
 
+  // Met à jour le titre de la page en fonction du terme de recherche
   useEffect(() => {
     document.title = searchTerm ? `Recherche: ${searchTerm} - Le Coin Lecture` : "Le Coin Lecture";
   }, [searchTerm]);
 
+  // Fonction pour récupérer les livres depuis l'API
   const fetchBooks = async () => {
     setLoading(true);
     try {
       const data = await getBooks(searchTerm);
       if (data.docs) {
         setBooks(data.docs);
-        setTotalPages(Math.ceil(data.numFound / booksPerPage));
+        setTotalPages(Math.ceil(data.numFound / booksPerPage)); 
       } else {
         setBooks([]);
         setTotalPages(1);
@@ -37,6 +42,7 @@ const Books = () => {
     }
   };
 
+  // met un délaissé avant de mettre à jour le terme de recherche
   useEffect(() => {
     const delay = setTimeout(() => {
       fetchBooks();
@@ -53,7 +59,7 @@ const Books = () => {
     >
       <h1 className="text-5xl font-extrabold text-center text-blue-700">📚 Le Coin Lecture</h1>
       
-      {/* Barre de recherche pour trouver des livres */}
+      {/* Barre de recherche */}
       <div className="flex justify-center mt-6 space-x-4">
         <input
           type="text"
@@ -79,9 +85,10 @@ const Books = () => {
         </button>
       </div>
 
+      {/* Affichage du message de chargement */}
       {loading && <p className="text-center text-gray-700 mt-6">Chargement des livres...</p>}
 
-      {/* Affichage des résultats  */}
+      {/* Affichage des résultats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
         {books.length > 0 ? (
           books.map((book) => (
@@ -92,6 +99,7 @@ const Books = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             >
+              {/* Affichage de la couverture du livre si disponible */}
               {book.cover_i ? (
                 <img
                   src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
@@ -110,6 +118,7 @@ const Books = () => {
                 <p className="text-gray-500 text-sm">📅 Année : {book.first_publish_year || "Inconnue"}</p>
                 <p className="text-gray-500 text-sm">📖 Éditions : {book.edition_count}</p>
                 
+                {/* Lien vers plus de détails sur le livre */}
                 <Link 
                   to={`/books/${encodeURIComponent(book.key.replace("/works/", ""))}`} 
                   className="text-blue-600 mt-4 block hover:underline"
@@ -124,7 +133,7 @@ const Books = () => {
         )}
       </div>
 
-      {/* Pagination pour naviguer entre les pages */}
+      {/* Composant de pagination */}
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -135,8 +144,6 @@ const Books = () => {
 };
 
 export default Books;
-
-
 
 
 
