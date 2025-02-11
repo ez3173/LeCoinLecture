@@ -12,9 +12,7 @@ const Books = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  // Terme de recherche par défaut
   const [searchTerm, setSearchTerm] = useState<string>("tolkien"); 
-  // Terme en cours de saisie
   const [pendingSearchTerm, setPendingSearchTerm] = useState<string>(""); 
   const [totalPages, setTotalPages] = useState<number>(1);
 
@@ -27,7 +25,7 @@ const Books = () => {
   const fetchBooks = async () => {
     setLoading(true);
     try {
-      const data = await getBooks(searchTerm);
+      const data = await getBooks(searchTerm, currentPage, booksPerPage);
       if (data.docs) {
         setBooks(data.docs);
         setTotalPages(Math.ceil(data.numFound / booksPerPage)); 
