@@ -28,7 +28,7 @@ const Footer = () => {
           </ul>
         </nav>
 
-        {/* Icônes sociales */}
+        {/* Icones web */}
         <div className="flex justify-center items-center space-x-6 mt-6">
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-blue-500 transition duration-300 transform hover:scale-125">
             <FaFacebook size={30} />

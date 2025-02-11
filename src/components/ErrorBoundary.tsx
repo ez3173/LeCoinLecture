@@ -15,11 +15,9 @@ class ErrorBoundary extends Component<{ children?: React.ReactNode }, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    // Envoi des erreurs à un service externe (ex. Sentry)
     console.error("Erreur capturée:", error);
     console.error("Informations sur l'erreur:", errorInfo);
-    // Tu pourrais ici envoyer l'erreur à un service de log
-    // Example: Sentry.captureException(error);
+    
   }
 
   handleReload = () => {

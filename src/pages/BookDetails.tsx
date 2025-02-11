@@ -25,7 +25,7 @@ const BookDetails = () => {
               typeof bookData.description === "string" ? bookData.description : bookData.description?.value || "Pas de description disponible",
           });
           
-          // Mise à jour du titre de la page dynamiquement
+          
           document.title = `${bookData.title} - Le Coin Lecture`;
         } catch (error) {
           console.error("Erreur lors de la récupération des détails du livre:", error);

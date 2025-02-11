@@ -46,7 +46,6 @@ const Home = () => {
         </Link>
       </motion.div>
       
-      {/* Citation inspirante */}
       <motion.div
         className="mt-10 text-center"
         initial={{ opacity: 0, y: 30 }}

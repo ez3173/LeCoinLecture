@@ -7,7 +7,7 @@ const Contact = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+ 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };
@@ -19,6 +19,7 @@ const Contact = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-blue-50 to-gray-100 px-6 text-center"
     >
+      <title>Contact-LeCoinLecture</title>
       <h1 className="text-5xl font-extrabold text-blue-700">Contactez-nous</h1>
       <p className="text-gray-700 text-lg mt-4 max-w-2xl">
         Une question ? Une suggestion ? N’hésitez pas à nous contacter en remplissant le formulaire ci-dessous.

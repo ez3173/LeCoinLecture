@@ -81,7 +81,7 @@ const Books = () => {
 
       {loading && <p className="text-center text-gray-700 mt-6">Chargement des livres...</p>}
 
-      {/* Affichage des résultats sous forme de cartes */}
+      {/* Affichage des résultats  */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
         {books.length > 0 ? (
           books.map((book) => (
